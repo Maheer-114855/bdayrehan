@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  font-family:Poppins,system-ui;
+  background:radial-gradient(circle at top,#7bdff2,#2a0b3a,#0b1026);
+  color:white;
+  overflow:hidden;
+  animation:fade .8s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:scale(1.02)}
+  to{opacity:1;transform:scale(1)}
+}
+.card{
+  text-align:center;
+  padding:28px;
+  width:min(92vw,520px);
+  background:rgba(255,255,255,.08);
+  border-radius:24px;
+  backdrop-filter:blur(14px);
+  box-shadow:0 25px 70px rgba(0,0,0,.6);
+}
+h1{
+  font-size:42px;
+  margin:10px 0;
+  text-shadow:0 0 30px rgba(255,255,255,.4);
+}
+p{opacity:.9}
+.cake{
+  font-size:80px;
+  animation:bounce 1.2s infinite alternate;
+}
+@keyframes bounce{
+  to{transform:translateY(-10px)}
+}
+.note{
+  margin-top:14px;
+  font-size:13px;
+  opacity:.75;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="cake">🎂</div>
+  <h1>Happy Birthday</h1>
+  <p>May your day be filled with joy, peace, and endless blessings ✨</p>
+  <div class="note">A message is waiting for you…</div>
+</div>
+
+<script>
+/* AUTO MOVE LIKE A SHORTS VIDEO */
+setTimeout(()=>{
+  window.location.href="letter.html";
+},8000);
+</script>
+
+</body>
+</html>
