@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday</title>
+
+<style>
+:root{
+  --bg1:#070a1f;
+  --bg2:#2a0b3a;
+  --gold:#ffd166;
+  --pink:#ff70a6;
+  --cyan:#7bdff2;
+  --mint:#caffbf;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  font-family:system-ui;
+  color:white;
+  background:
+    radial-gradient(900px 600px at 15% 20%, #7bdff233, transparent 60%),
+    radial-gradient(900px 700px at 85% 25%, #ff70a633, transparent 58%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  overflow:hidden;
+}
+
+/* ===== SHAKE ===== */
+@keyframes discordShake {
+  0%{transform:translate(0,0)}
+  10%{transform:translate(-12px,10px)}
+  20%{transform:translate(12px,-10px)}
+  30%{transform:translate(-10px,-12px)}
+  40%{transform:translate(10px,12px)}
+  50%{transform:translate(-8px,6px)}
+  60%{transform:translate(8px,-6px)}
+  70%{transform:translate(-6px,8px)}
+  80%{transform:translate(6px,-8px)}
+  100%{transform:translate(0,0)}
+}
+.shake{
+  animation:discordShake .12s infinite;
+}
+
+/* ===== BALLOONS ===== */
+.balloons{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+.balloon{
+  position:absolute;
+  bottom:-120px;
+  width:70px;
+  height:90px;
+  border-radius:50%;
+  animation:floatUp linear infinite;
+}
+.balloon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:90px;
+  width:2px;
+  height:90px;
+  background:#fff8;
+  transform:translateX(-50%);
+}
+@keyframes floatUp{
+  to{transform:translateY(-140vh)}
+}
+
+/* ===== CONFETTI / POPPERS ===== */
+.confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:10000;
+}
+.confetti i{
+  position:absolute;
+  width:8px;
+  height:14px;
+  background:var(--gold);
+  animation:fall 1.6s linear forwards;
+}
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* ===== CARD ===== */
+.card{
+  width:min(90vw,520px);
+  background:rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:20px;
+  text-align:center;
+  backdrop-filter:blur(12px);
+  position:relative;
+  z-index:2;
+}
+
+/* ===== CAKE ===== */
+.stage{display:grid;place-items:center}
+.cakeWrap{position:relative;width:260px;height:240px}
+.plate{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  width:280px;
+  height:24px;
+  transform:translateX(-50%);
+  background:#fff3;
+  border-radius:50%;
+}
+.cake{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  width:240px;
+  height:150px;
+  background:linear-gradient(180deg,var(--pink),#bdb2ff);
+  border-radius:20px;
+}
+.icing{
+  position:absolute;
+  bottom:170px;
+  left:50%;
+  transform:translateX(-50%);
+  width:240px;
+  height:40px;
+  background:white;
+  border-radius:20px;
+}
+.sprinkles{
+  position:absolute;
+  inset:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.sprinkles span{
+  width:12px;
+  height:6px;
+  border-radius:10px;
+  background:var(--gold);
+}
+
+/* ===== CANDLE ===== */
+.candle{
+  position:absolute;
+  bottom:200px;
+  left:50%;
+  transform:translateX(-50%);
+  width:18px;
+  height:60px;
+  background:repeating-linear-gradient(
+    45deg,#fff 0 6px,var(--cyan) 6px 12px
+  );
+  border-radius:8px;
+  z-index:1;
+}
+.flame{
+  position:absolute;
+  top:-35px;
+  left:50%;
+  transform:translateX(-50%);
+  width:24px;
+  height:36px;
+  background:radial-gradient(circle at 50% 60%,#fff,var(--gold));
+  border-radius:50%;
+  animation:flicker .15s infinite alternate;
+}
+@keyframes flicker{
+  from{transform:translateX(-50%) scale(1)}
+  to{transform:translateX(-50%) scale(1.1)}
+}
+
+/* ===== BUTTON ===== */
+button{
+  margin-top:20px;
+  padding:14px 18px;
+  font-weight:800;
+  border-radius:14px;
+  border:0;
+  cursor:pointer;
+  background:linear-gradient(
+    90deg,var(--gold),var(--cyan),var(--pink)
+  );
+}
+
+/* ===== TAKEOVER ===== */
+#takeover{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:none;
+  z-index:9999;
+}
+#takeover video{
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<div class="balloons" id="balloons"></div>
+<div class="confetti" id="confetti"></div>
+
+<div class="card">
+  <h1>Happy Birthday 🎉</h1>
+
+  <div class="stage">
+    <div class="cakeWrap">
+      <div class="plate"></div>
+      <div class="icing">
+        <div class="sprinkles" id="sprinkles"></div>
+      </div>
+      <div class="cake"></div>
+      <div class="candle">
+        <div class="flame" id="flame"></div>
+      </div>
+    </div>
+  </div>
+
+  <button id="actionBtn">Blow Candle 🎂</button>
+</div>
+
+<div id="takeover">
+  <video id="takeoverVideo" src="meme.mp4" playsinline></video>
+</div>
+
+<script>
+/* SPRINKLES */
+const sprinkles = document.getElementById("sprinkles");
+for (let i = 0; i < 30; i++) {
+  const s = document.createElement("span");
+  s.style.background = ["#ffd166","#7bdff2","#ff70a6","#caffbf"][i % 4];
+  sprinkles.appendChild(s);
+}
+
+/* BALLOONS */
+const balloons = document.getElementById("balloons");
+for (let i = 0; i < 12; i++) {
+  const b = document.createElement("div");
+  b.className = "balloon";
+  b.style.left = Math.random() * 100 + "vw";
+  b.style.background = ["#ff70a6","#7bdff2","#ffd166","#caffbf"][i % 4];
+  b.style.animationDuration = 10 + Math.random() * 6 + "s";
+  balloons.appendChild(b);
+}
+
+/* CONFETTI */
+const confetti = document.getElementById("confetti");
+function poppers() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("i");
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = "-10px";
+    c.style.background = ["#ffd166","#7bdff2","#ff70a6","#caffbf","#fff"][i % 5];
+    c.style.animationDuration = 1 + Math.random() * 1.2 + "s";
+    confetti.appendChild(c);
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+
+/* ELEMENTS */
+const btn = document.getElementById("actionBtn");
+const flame = document.getElementById("flame");
+const takeover = document.getElementById("takeover");
+const video = document.getElementById("takeoverVideo");
+
+/* AUDIO (IMPORTANT PART) */
+let audioCtx = null;
+let source = null;
+
+btn.onclick = async () => {
+
+  // 🔥 visuals
+  flame.style.display = "none";
+  poppers();
+  document.body.classList.add("shake");
+  takeover.classList.add("shake");
+
+  takeover.style.display = "block";
+
+  // 🔊 VIDEO SOUND (simple & reliable)
+  video.muted = false;
+  video.volume = 1;
+
+  // warm up audio so no delay
+if (video.paused) {
+  video.play();
+  video.pause();
+}
+
+  video.currentTime = 0;
+
+  try {
+    await video.play();
+  } catch (e) {
+    console.log("Play blocked:", e);
+  }
+
+  // ⏱ redirect
+  setTimeout(() => {
+    document.body.classList.remove("shake");
+    takeover.classList.remove("shake");
+    window.location.href = "letter.html";
+  }, 5000);
+};
+</script>
+</body>
+</html>
