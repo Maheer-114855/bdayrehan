@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Happy Birthday</title>
+
 <style>
 :root{
   --bg1:#070a1f;
@@ -107,7 +108,12 @@ body{
   position:relative;
   z-index:2;
 }
-
+.name-right{
+  display: block;        /* puts it on its own line */
+  text-align: right;     /* aligns ONLY this text */
+  font-size: 0.9em;      /* optional */
+  margin-top: 6px;       /* optional spacing */
+}
 /* ===== CAKE ===== */
 .stage{display:grid;place-items:center}
 .cakeWrap{position:relative;width:260px;height:240px}
@@ -221,9 +227,8 @@ button{
 
 <div class="card">
   <h1>Happy Birthday my atom 🎉</h1>
-    <h2>May allah increase ur lifespan 
-  and keep us togather in this world also in akhirah </h2> 
-                            <h3>-AMEEN</h3>
+      <h2>May allah increase ur lifespan and keep us togather in this world also in akhirah</h2> 
+      <h3><div class="name-right">-AMEEN</div></h3>
   <div class="stage">
     <div class="cakeWrap">
       <div class="plate"></div>
@@ -325,6 +330,4 @@ if (video.paused) {
 };
 </script>
 </body>
-
 </html>
-
